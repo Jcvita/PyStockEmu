@@ -1,6 +1,6 @@
-'''
-    virtual stonk trading simulator 
-'''
+"""
+    virtual stonk trading simulator
+"""
 
 import os
 from dataclasses import dataclass
@@ -67,8 +67,13 @@ class Agent:
         self.port = portfolio
         self.file = agentfile
 
-    def save(self, outfile):
-        pass
+    def save(self, outfile=''):
+        fname = ''
+        if outfile == '':
+            os.mknod(f"{self.nam}{str(len(os.listdir('saves')))}.txt")
+            fname = self.nam + str(len(os.listdir('saves'))) + '.txt'
+        else:
+            os.mknod(outfile)
 
     def buy(self, stock):
         if stock.p == 0:
@@ -101,7 +106,6 @@ class Agent:
         return worth
 
 
-
 joe = Agent()
 msft = Stock()
 msft.name = 'msft'
@@ -111,3 +115,4 @@ print(joe.port.value)
 joe.update_portfolio()
 print(joe.port.value)
 print(joe.net_worth())
+joe.save()
